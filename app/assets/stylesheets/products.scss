@@ -51,6 +51,15 @@ main section.categories-show {
         font-size: 0.8em;
       }
 
+      aside.stock-stack {
+        position: absolute;
+        top: 0;
+        background: lightpink;
+        padding: 10px;
+        left: 0;
+        border-bottom-right-radius: 5px;
+      }
+
       &:hover {
 
         border-color: #999;
