@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   
   def show
     @order = Order.find(params[:id])
-    # @products = create_order
+    @lineItems = LineItem.where('order_id = ?', @order.id )
   end
 
   def create
@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
     order  = create_order(charge)
 
     if order.valid?
-        !
+      empty_cart!
       redirect_to order, notice: 'Your Order has been placed.'
     else
       redirect_to cart_path, flash: { error: order.errors.full_messages.first }
@@ -23,6 +23,11 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def returnProducts
+    products = enhanced_cart
+    products
+  end
 
   def empty_cart!
     update_cart({})
@@ -43,7 +48,7 @@ class OrdersController < ApplicationController
       total_cents: cart_subtotal_cents,
       stripe_charge_id: stripe_charge.id, # returned by stripe
     )
-
+    returnProducts
     enhanced_cart.each do |entry|
       product = entry[:product]
       quantity = entry[:quantity]
