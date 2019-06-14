@@ -6,13 +6,15 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @lineItems = LineItem.where('order_id = ?', @order.id )
   end
-
+  
   def create
     charge = perform_stripe_charge
     order  = create_order(charge)
-
+   
+    
     if order.valid?
       empty_cart!
+      UserMailer.welcome(order, enhanced_cart).deliver_now
       redirect_to order, notice: 'Your Order has been placed.'
     else
       redirect_to cart_path, flash: { error: order.errors.full_messages.first }
