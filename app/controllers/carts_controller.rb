@@ -2,6 +2,7 @@ class CartsController < ApplicationController
 
   before_filter :authorize
   def show
+     @empty = cart_subtotal_cents == 0
   end
 
   def add_item
