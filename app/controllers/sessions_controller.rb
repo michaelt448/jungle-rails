@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
           session[:user_id] = user.id
           redirect_to '/'
         else
-        # If user's login doesn't work, send them back to the login form.
+        # If user's login doesn't work, send them back to the login
           redirect_to '/login'
         end
       end

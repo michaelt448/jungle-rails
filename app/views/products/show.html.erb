@@ -26,11 +26,36 @@
         </dl>
       </div>
       <ul>
-        <% @review.each do |r|%>
+        <% @reviews.each do |r|%>
           <li> <%= r.decription %> 
            <%= r.rating %> </li>
         <% end %>
       </ul>
+      <%= form_for @review, url: product_path(@reviews) do |form| %>
+        <% if form.object.errors.any? %>
+          <div class="alert alert-danger">
+            <strong>The following errors prevented saving:</strong>
+            <ul>
+              <% form.object.errors.full_messages.each do |error| %>
+                <li><%= error %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= form.label :decription %>
+          <%= form.text_field :decription, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :rating %>
+          <%= select_tag(:rating, options_for_select([['1', 1], ['2', 2], ['3', 3],['4', 4],['5', 5]])) %>
+        </div>
+
+      <%= form.submit 'Create Product', class: 'btn btn-primary' %>
+      
+      <% end %>
 
     </div>
 
