@@ -10,10 +10,4 @@ class ProductsController < ApplicationController
     @review = @product.review.new
   end
 
-
-  def category_params
-    params.require(:category).permit(
-      :name,
-    )
-  end
 end

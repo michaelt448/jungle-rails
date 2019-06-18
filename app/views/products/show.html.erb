@@ -31,7 +31,7 @@
            <%= r.rating %> </li>
         <% end %>
       </ul>
-      <%= form_for @review, url: product_path(@reviews) do |form| %>
+      <%= form_for @review, url: product_reviews_path(@product.id) do |form| %>
         <% if form.object.errors.any? %>
           <div class="alert alert-danger">
             <strong>The following errors prevented saving:</strong>
@@ -50,7 +50,7 @@
 
         <div class="form-group">
           <%= form.label :rating %>
-          <%= select_tag(:rating, options_for_select([['1', 1], ['2', 2], ['3', 3],['4', 4],['5', 5]])) %>
+          <%= form.select(:rating, options_for_select([['1', 1], ['2', 2], ['3', 3],['4', 4],['5', 5]])) %>
         </div>
 
       <%= form.submit 'Create Product', class: 'btn btn-primary' %>
