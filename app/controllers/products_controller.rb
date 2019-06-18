@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  
 
   def index
     @products = Product.all.order(created_at: :desc)
@@ -10,4 +11,5 @@ class ProductsController < ApplicationController
     @review = @product.review.new
   end
 
+  
 end

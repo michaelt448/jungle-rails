@@ -25,38 +25,46 @@
           <dt>
         </dl>
       </div>
+      <div class = 'reviews'>
+        <h5> <b> Reviews </b> </h5>
       <ul>
         <% @reviews.each do |r|%>
-          <li> <%= r.decription %> 
+          <li> 
+          <% if current_user != nil && r.user_id == current_user.id %>
+          <%= button_to 'Delete ', product_reviews_path(@product.id, r.id), :method => :delete %>
+          <% end %>
+          <%= r.decription %> 
            <%= r.rating %> </li>
         <% end %>
       </ul>
-      <%= form_for @review, url: product_reviews_path(@product.id) do |form| %>
-        <% if form.object.errors.any? %>
-          <div class="alert alert-danger">
-            <strong>The following errors prevented saving:</strong>
-            <ul>
-              <% form.object.errors.full_messages.each do |error| %>
-                <li><%= error %></li>
-              <% end %>
-            </ul>
+      </div>
+        <%if current_user  %>
+          <%= form_for @review, url: product_reviews_path(@product.id) do |form| %>
+          <% if form.object.errors.any? %>
+            <div class="alert alert-danger">
+              <strong>The following errors prevented saving:</strong>
+              <ul>
+                <% form.object.errors.full_messages.each do |error| %>
+                  <li><%= error %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="form-group">
+            <%= form.label :decription %>
+            <%= form.text_field :decription, class: 'form-control' %>
           </div>
+
+          <div class="form-group">
+            <%= form.label :rating %>
+            <%= form.select(:rating, options_for_select([['1', 1], ['2', 2], ['3', 3],['4', 4],['5', 5]])) %>
+          </div>
+
+        <%= form.submit 'Create Review', class: 'btn btn-primary' %>
+        
         <% end %>
-
-        <div class="form-group">
-          <%= form.label :decription %>
-          <%= form.text_field :decription, class: 'form-control' %>
-        </div>
-
-        <div class="form-group">
-          <%= form.label :rating %>
-          <%= form.select(:rating, options_for_select([['1', 1], ['2', 2], ['3', 3],['4', 4],['5', 5]])) %>
-        </div>
-
-      <%= form.submit 'Create Product', class: 'btn btn-primary' %>
-      
       <% end %>
-
     </div>
 
   </article>
