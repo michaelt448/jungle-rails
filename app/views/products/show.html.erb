@@ -28,7 +28,7 @@
       <div class = 'reviews'>
         <h5> <b> Reviews </b> </h5>
       <ul>
-        <% @reviews.each do |r|%>
+        <% @reviews.reverse_order !.each do |r|%>
           <li> 
           <% if current_user != nil && r.user_id == current_user.id %>
           <%= button_to 'Delete ', product_reviews_path(@product.id, r.id), :method => :delete %>
