@@ -3,7 +3,9 @@
 A mini e-commerce application built with Rails 4.2 for purposes of teaching Rails by example.
 The application has been extended to have additional features including user-authentication, user-specific experience, and reviews for all items.
 
-
+[front page](https://github.com/michaelt448/jungle-rails/blob/master/docs/Screenshot%20from%202019-06-18%2001-42-02.png?raw=true)
+[cart of items](https://github.com/michaelt448/jungle-rails/blob/master/docs/Screenshot%20from%202019-06-18%2001-43-12.png?raw=true)
+[detailed item](https://github.com/michaelt448/jungle-rails/blob/master/docs/Screenshot%20from%202019-06-18%2001-43-12.png?raw=true)
 
 
 ## Setup
